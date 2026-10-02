@@ -1,0 +1,482 @@
+{
+  "selectedBranch": "branch-main",
+  "branches": [
+    {
+      "id": "branch-main",
+      "name": "Central Bistro",
+      "city": "Noida",
+      "tables": 12
+    },
+    {
+      "id": "branch-river",
+      "name": "Riverfront Cafe",
+      "city": "Delhi",
+      "tables": 10
+    }
+  ],
+  "settings": {
+    "gstRate": 0.05,
+    "currency": "INR",
+    "paymentProvider": "DemoPay UPI/Card",
+    "printer": "Kitchen thermal printer",
+    "posProvider": "Generic POS webhook",
+    "whatsappEnabled": true,
+    "smsEnabled": true
+  },
+  "coupons": [
+    {
+      "code": "WELCOME10",
+      "type": "percent",
+      "value": 10,
+      "active": true
+    },
+    {
+      "code": "TABLE50",
+      "type": "flat",
+      "value": 50,
+      "active": true
+    }
+  ],
+  "customers": [],
+  "integrations": [
+    {
+      "id": "pos",
+      "name": "POS sync",
+      "status": "demo",
+      "detail": "Webhook ready for POS order push."
+    },
+    {
+      "id": "printer",
+      "name": "Kitchen printer",
+      "status": "demo",
+      "detail": "Printable tickets generated from KDS."
+    },
+    {
+      "id": "kds",
+      "name": "External KDS",
+      "status": "demo",
+      "detail": "Live event stream can feed wall displays."
+    },
+    {
+      "id": "whatsapp",
+      "name": "WhatsApp/SMS",
+      "status": "demo",
+      "detail": "Receipt and status notification events are logged."
+    }
+  ],
+  "menu": [
+    {
+      "id": "masala-fries",
+      "name": "Masala Fries",
+      "category": "Starters",
+      "price": 149,
+      "station": "food",
+      "description": "Crisp fries tossed with house masala, lime, and coriander.",
+      "tags": [
+        "veg",
+        "quick"
+      ],
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80",
+      "stock": 28,
+      "lowStockAt": 5,
+      "availableFrom": "09:00",
+      "availableTo": "23:00",
+      "modifiers": {
+        "spice": [
+          "Mild",
+          "Medium",
+          "Hot"
+        ],
+        "addOns": [
+          {
+            "name": "Extra cheese",
+            "price": 39
+          },
+          {
+            "name": "Garlic bread",
+            "price": 79
+          },
+          {
+            "name": "Cold drink combo",
+            "price": 99
+          }
+        ],
+        "removable": [
+          "Onion",
+          "Garlic",
+          "Chilli",
+          "Coriander"
+        ]
+      }
+    },
+    {
+      "id": "paneer-tikka",
+      "name": "Paneer Tikka",
+      "category": "Starters",
+      "price": 269,
+      "station": "food",
+      "description": "Smoky cottage cheese skewers with peppers and mint chutney.",
+      "tags": [
+        "veg",
+        "spicy"
+      ],
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=900&q=80",
+      "stock": 18,
+      "lowStockAt": 5,
+      "availableFrom": "09:00",
+      "availableTo": "23:00",
+      "modifiers": {
+        "spice": [
+          "Mild",
+          "Medium",
+          "Hot"
+        ],
+        "addOns": [
+          {
+            "name": "Extra cheese",
+            "price": 39
+          },
+          {
+            "name": "Garlic bread",
+            "price": 79
+          },
+          {
+            "name": "Cold drink combo",
+            "price": 99
+          }
+        ],
+        "removable": [
+          "Onion",
+          "Garlic",
+          "Chilli",
+          "Coriander"
+        ]
+      }
+    },
+    {
+      "id": "grain-bowl",
+      "name": "Herb Grain Bowl",
+      "category": "Bowls",
+      "price": 289,
+      "station": "food",
+      "description": "Millet, roasted vegetables, greens, pickles, and tahini.",
+      "tags": [
+        "vegan",
+        "healthy"
+      ],
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80",
+      "stock": 15,
+      "lowStockAt": 5,
+      "availableFrom": "09:00",
+      "availableTo": "23:00",
+      "modifiers": {
+        "spice": [
+          "Mild",
+          "Medium",
+          "Hot"
+        ],
+        "addOns": [
+          {
+            "name": "Extra cheese",
+            "price": 39
+          },
+          {
+            "name": "Garlic bread",
+            "price": 79
+          },
+          {
+            "name": "Cold drink combo",
+            "price": 99
+          }
+        ],
+        "removable": [
+          "Onion",
+          "Garlic",
+          "Chilli",
+          "Coriander"
+        ]
+      }
+    },
+    {
+      "id": "alfredo-pasta",
+      "name": "Mushroom Alfredo",
+      "category": "Mains",
+      "price": 349,
+      "station": "food",
+      "description": "Creamy pasta with mushrooms, parmesan, and cracked pepper.",
+      "tags": [
+        "veg"
+      ],
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=900&q=80",
+      "stock": 20,
+      "lowStockAt": 5,
+      "availableFrom": "09:00",
+      "availableTo": "23:00",
+      "modifiers": {
+        "spice": [
+          "Mild",
+          "Medium",
+          "Hot"
+        ],
+        "addOns": [
+          {
+            "name": "Extra cheese",
+            "price": 39
+          },
+          {
+            "name": "Garlic bread",
+            "price": 79
+          },
+          {
+            "name": "Cold drink combo",
+            "price": 99
+          }
+        ],
+        "removable": [
+          "Onion",
+          "Garlic",
+          "Chilli",
+          "Coriander"
+        ]
+      }
+    },
+    {
+      "id": "margherita-pizza",
+      "name": "Margherita Pizza",
+      "category": "Mains",
+      "price": 379,
+      "station": "food",
+      "description": "Tomato, basil, mozzarella, and olive oil on a thin crust.",
+      "tags": [
+        "veg",
+        "popular"
+      ],
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=900&q=80",
+      "stock": 16,
+      "lowStockAt": 5,
+      "availableFrom": "09:00",
+      "availableTo": "23:00",
+      "modifiers": {
+        "spice": [
+          "Mild",
+          "Medium",
+          "Hot"
+        ],
+        "addOns": [
+          {
+            "name": "Extra cheese",
+            "price": 39
+          },
+          {
+            "name": "Garlic bread",
+            "price": 79
+          },
+          {
+            "name": "Cold drink combo",
+            "price": 99
+          }
+        ],
+        "removable": [
+          "Onion",
+          "Garlic",
+          "Chilli",
+          "Coriander"
+        ]
+      }
+    },
+    {
+      "id": "smash-burger",
+      "name": "Smash Burger",
+      "category": "Mains",
+      "price": 329,
+      "station": "food",
+      "description": "Double patty, cheddar, house sauce, lettuce, and pickles.",
+      "tags": [
+        "popular"
+      ],
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=900&q=80",
+      "stock": 20,
+      "lowStockAt": 5,
+      "availableFrom": "09:00",
+      "availableTo": "23:00",
+      "modifiers": {
+        "spice": [
+          "Mild",
+          "Medium",
+          "Hot"
+        ],
+        "addOns": [
+          {
+            "name": "Extra cheese",
+            "price": 39
+          },
+          {
+            "name": "Garlic bread",
+            "price": 79
+          },
+          {
+            "name": "Cold drink combo",
+            "price": 99
+          }
+        ],
+        "removable": [
+          "Onion",
+          "Garlic",
+          "Chilli",
+          "Coriander"
+        ]
+      }
+    },
+    {
+      "id": "brownie",
+      "name": "Skillet Brownie",
+      "category": "Desserts",
+      "price": 219,
+      "station": "food",
+      "description": "Warm chocolate brownie with vanilla ice cream.",
+      "tags": [
+        "eggless"
+      ],
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=80",
+      "stock": 12,
+      "lowStockAt": 5,
+      "availableFrom": "09:00",
+      "availableTo": "23:00",
+      "modifiers": {
+        "spice": [
+          "Mild",
+          "Medium",
+          "Hot"
+        ],
+        "addOns": [
+          {
+            "name": "Extra cheese",
+            "price": 39
+          },
+          {
+            "name": "Garlic bread",
+            "price": 79
+          },
+          {
+            "name": "Cold drink combo",
+            "price": 99
+          }
+        ],
+        "removable": [
+          "Onion",
+          "Garlic",
+          "Chilli",
+          "Coriander"
+        ]
+      }
+    },
+    {
+      "id": "iced-tea",
+      "name": "Peach Iced Tea",
+      "category": "Drinks",
+      "price": 129,
+      "station": "drink",
+      "description": "Fresh brewed tea with peach, lemon, and crushed ice.",
+      "tags": [
+        "cold"
+      ],
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=80",
+      "stock": 35,
+      "lowStockAt": 5,
+      "availableFrom": "09:00",
+      "availableTo": "23:00",
+      "modifiers": {
+        "spice": [
+          "Mild",
+          "Medium",
+          "Hot"
+        ],
+        "addOns": [
+          {
+            "name": "Extra cheese",
+            "price": 39
+          },
+          {
+            "name": "Garlic bread",
+            "price": 79
+          },
+          {
+            "name": "Cold drink combo",
+            "price": 99
+          }
+        ],
+        "removable": [
+          "Onion",
+          "Garlic",
+          "Chilli",
+          "Coriander"
+        ]
+      }
+    },
+    {
+      "id": "mint-cooler",
+      "name": "Mint Cooler",
+      "category": "Drinks",
+      "price": 139,
+      "station": "drink",
+      "description": "Mint, lime, soda, and a touch of jaggery syrup.",
+      "tags": [
+        "cold",
+        "refreshing"
+      ],
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=80",
+      "stock": 30,
+      "lowStockAt": 5,
+      "availableFrom": "09:00",
+      "availableTo": "23:00",
+      "modifiers": {
+        "spice": [
+          "Mild",
+          "Medium",
+          "Hot"
+        ],
+        "addOns": [
+          {
+            "name": "Extra cheese",
+            "price": 39
+          },
+          {
+            "name": "Garlic bread",
+            "price": 79
+          },
+          {
+            "name": "Cold drink combo",
+            "price": 99
+          }
+        ],
+        "removable": [
+          "Onion",
+          "Garlic",
+          "Chilli",
+          "Coriander"
+        ]
+      }
+    }
+  ],
+  "orders": [],
+  "staffRequests": [],
+  "eventLog": [
+    {
+      "id": "29345cf7-a864-40fb-8a77-c1827aa1c89d",
+      "message": "Demo data reset.",
+      "meta": {
+        "role": "admin"
+      },
+      "createdAt": "2026-09-23T04:37:31.581Z"
+    }
+  ]
+}

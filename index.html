@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TableServe Restro OS</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary">
+        <div class="brand">
+          <div class="brand-mark">TS</div>
+          <div>
+            <strong>TableServe</strong>
+            <span>Restro OS</span>
+          </div>
+        </div>
+
+        <nav class="role-tabs" aria-label="Role views">
+          <button class="nav-button active" data-view="customer" type="button">
+            <span aria-hidden="true">□</span>
+            Customer
+          </button>
+          <button class="nav-button" data-view="kitchen" type="button">
+            <span aria-hidden="true">▤</span>
+            Kitchen
+          </button>
+          <button class="nav-button" data-view="admin" type="button">
+            <span aria-hidden="true">◎</span>
+            Admin
+          </button>
+          <button class="nav-button" data-view="growth" type="button">
+            <span aria-hidden="true">◇</span>
+            Growth
+          </button>
+          <button class="nav-button" data-view="flyer" type="button">
+            <span aria-hidden="true">▧</span>
+            QR flyer
+          </button>
+        </nav>
+
+        <div class="sidebar-panel">
+          <p class="eyebrow">Today</p>
+          <div class="mini-stat">
+            <span id="todayOrders">0</span>
+            <small>orders</small>
+          </div>
+          <div class="mini-stat">
+            <span id="todayRevenue">₹0</span>
+            <small>revenue</small>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="viewEyebrow">Customer app</p>
+            <h1 id="viewTitle">Scan, choose, order</h1>
+          </div>
+          <div class="topbar-actions">
+            <a class="ghost-button" href="/staff">Floor staff</a>
+            <button class="ghost-button" id="changePassword" type="button">Account</button>
+            <button class="ghost-button" id="teamAccess" type="button">Team access</button>
+            <label class="field branch-field">
+              <span>Branch</span>
+              <select id="branchSelect"></select>
+            </label>
+            <div class="session-card" id="sessionCard">
+              <span id="sessionLabel">Guest mode</span>
+              <button class="ghost-button" id="loginToggle" type="button">Login</button>
+            </div>
+            <button class="ghost-button" id="resetDemo" type="button">Reset demo</button>
+            <button class="primary-button" id="seedOrder" type="button">Create sample order</button>
+          </div>
+        </header>
+
+        <section class="login-panel" id="loginPanel" hidden>
+          <div>
+            <p class="eyebrow">Role login</p>
+            <h2>Admin, kitchen, and staff access</h2>
+          </div>
+          <label class="field">
+            <span>Role</span>
+            <select id="loginRole">
+              <option value="admin">Admin</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="staff">Staff</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>PIN</span>
+            <input id="loginPin" type="password" autocomplete="current-password">
+          </label>
+          <button class="primary-button" id="loginButton" type="button">Sign in</button>
+        </section>
+
+        <section class="view active" id="customerView" aria-labelledby="customerHeading">
+          <div class="customer-grid">
+            <section class="menu-pane">
+              <div class="toolbar">
+                <label class="field compact">
+                  <span>Table</span>
+                  <select id="tableSelect"></select>
+                </label>
+                <label class="field search">
+                  <span>Search</span>
+                  <input id="menuSearch" type="search" placeholder="Dish, tag, category">
+                </label>
+              </div>
+
+              <div class="category-strip" id="categoryStrip" aria-label="Menu categories"></div>
+              <div class="notice">
+                <strong>Smart table ordering</strong>
+                <span>Each QR opens this menu with the table already selected. Guests can add notes, see allergens, and track order status.</span>
+              </div>
+              <div class="menu-grid" id="menuGrid"></div>
+            </section>
+
+            <aside class="cart-pane" aria-label="Order cart">
+              <div class="cart-header">
+                <div>
+                  <p class="eyebrow">Live cart</p>
+                  <h2>Table <span id="cartTable">1</span></h2>
+                </div>
+                <button class="icon-button" id="clearCart" type="button" title="Clear cart">×</button>
+              </div>
+              <div class="cart-items" id="cartItems"></div>
+              <div class="customer-fields">
+                <label class="field">
+                  <span>Name</span>
+                  <input id="customerName" placeholder="Guest name">
+                </label>
+                <label class="field">
+                  <span>Phone</span>
+                  <input id="customerPhone" inputmode="tel" placeholder="WhatsApp/SMS number">
+                </label>
+              </div>
+              <label class="field">
+                <span>Kitchen note</span>
+                <textarea id="cartNote" rows="3" placeholder="Less spicy, no onion, birthday dessert..."></textarea>
+              </label>
+              <div class="payment-box">
+                <label class="field">
+                  <span>Payment</span>
+                  <select id="paymentMethod">
+                    <option value="pay-later">Pay after meal</option>
+                    <option value="upi">UPI</option>
+                    <option value="card">Card</option>
+                    <option value="cash">Cash</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Split bill</span>
+                  <input id="splitCount" type="number" min="1" value="1">
+                </label>
+                <label class="field">
+                  <span>Tip</span>
+                  <input id="tipAmount" type="number" min="0" value="0">
+                </label>
+                <label class="field">
+                  <span>Coupon</span>
+                  <input id="couponCode" placeholder="WELCOME10">
+                </label>
+              </div>
+              <div class="bill-lines">
+                <div><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+                <div><span>Discount</span><strong id="discount">₹0</strong></div>
+                <div><span>GST 5%</span><strong id="tax">₹0</strong></div>
+                <div><span>Tip</span><strong id="tip">₹0</strong></div>
+                <div><span>Per person</span><strong id="perPerson">₹0</strong></div>
+                <div class="total"><span>Total</span><strong id="total">₹0</strong></div>
+              </div>
+              <button class="primary-button full" id="placeOrder" type="button">Place order</button>
+              <button class="ghost-button full" id="callStaff" type="button">Request staff help</button>
+              <div class="order-status" id="guestStatus"></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="kitchenView" aria-labelledby="kitchenHeading">
+          <div class="kitchen-header">
+            <div>
+              <p class="eyebrow">Kitchen display</p>
+              <h2 id="kitchenHeading">Orders by station and status</h2>
+            </div>
+            <div class="segmented" role="group" aria-label="Kitchen filters">
+              <button class="segment active" data-kitchen-filter="all" type="button">All</button>
+              <button class="segment" data-kitchen-filter="food" type="button">Food</button>
+              <button class="segment" data-kitchen-filter="drink" type="button">Drinks</button>
+            </div>
+          </div>
+          <div class="kds-board" id="kdsBoard"></div>
+        </section>
+
+        <section class="view" id="adminView" aria-labelledby="adminHeading">
+          <div class="admin-grid">
+            <section>
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Admin app</p>
+                  <h2 id="adminHeading">Menu, QR tables, and availability</h2>
+                </div>
+              </div>
+
+              <form class="admin-form" id="menuForm">
+                <input type="hidden" id="itemId">
+                <label class="field">
+                  <span>Name</span>
+                  <input id="itemName" required placeholder="Paneer tikka">
+                </label>
+                <label class="field">
+                  <span>Category</span>
+                  <input id="itemCategory" required placeholder="Starters">
+                </label>
+                <label class="field">
+                  <span>Price</span>
+                  <input id="itemPrice" required min="1" type="number" placeholder="240">
+                </label>
+                <label class="field">
+                  <span>Station</span>
+                  <select id="itemStation">
+                    <option value="food">Food</option>
+                    <option value="drink">Drinks</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Stock</span>
+                  <input id="itemStock" min="0" type="number" placeholder="20">
+                </label>
+                <label class="field">
+                  <span>Low stock alert</span>
+                  <input id="itemLowStock" min="0" type="number" placeholder="5">
+                </label>
+                <label class="field">
+                  <span>Available from</span>
+                  <input id="itemAvailableFrom" type="time" value="09:00">
+                </label>
+                <label class="field">
+                  <span>Available to</span>
+                  <input id="itemAvailableTo" type="time" value="23:00">
+                </label>
+                <label class="field span-2">
+                  <span>Description</span>
+                  <input id="itemDescription" required placeholder="Short customer-friendly description">
+                </label>
+                <label class="field span-2">
+                  <span>Tags</span>
+                  <input id="itemTags" placeholder="veg, spicy, gluten-free">
+                </label>
+                <label class="field span-2">
+                  <span>Image URL</span>
+                  <input id="itemImage" placeholder="https://...">
+                </label>
+                <label class="field span-2">
+                  <span>Add-ons</span>
+                  <input id="itemAddOns" placeholder="Extra cheese:39, Garlic bread:79">
+                </label>
+                <label class="field span-2">
+                  <span>Removable ingredients</span>
+                  <input id="itemRemovable" placeholder="Onion, Garlic, Chilli">
+                </label>
+                <label class="toggle-row">
+                  <input id="itemAvailable" type="checkbox" checked>
+                  Available today
+                </label>
+                <div class="form-actions">
+                  <button class="ghost-button" id="cancelEdit" type="button">Cancel</button>
+                  <button class="primary-button" type="submit">Save item</button>
+                </div>
+              </form>
+
+              <div class="table-list" id="adminMenuList"></div>
+            </section>
+
+            <aside class="admin-side">
+              <section class="insight-panel">
+                <p class="eyebrow">Operations</p>
+                <div class="insight-grid">
+                  <div><strong id="activeItems">0</strong><span>active items</span></div>
+                  <div><strong id="openOrders">0</strong><span>open orders</span></div>
+                  <div><strong id="avgTicket">₹0</strong><span>avg ticket</span></div>
+                  <div><strong id="busyTable">-</strong><span>busiest table</span></div>
+                  <div><strong id="loyaltyMembers">0</strong><span>loyalty members</span></div>
+                  <div><strong id="lowStockItems">0</strong><span>low stock</span></div>
+                </div>
+              </section>
+
+              <section class="qr-panel">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Branches</p>
+                    <h3>Multi-branch analytics</h3>
+                  </div>
+                </div>
+                <div class="branch-grid" id="branchAnalytics"></div>
+              </section>
+
+              <section class="qr-panel">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Integrations</p>
+                    <h3>POS, printer, KDS, WhatsApp</h3>
+                  </div>
+                </div>
+                <div class="integration-list" id="integrationList"></div>
+              </section>
+
+              <section class="qr-panel">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Tables</p>
+                    <h3>Printable QR codes</h3>
+                  </div>
+                  <button class="ghost-button" id="printQrs" type="button">Print</button>
+                </div>
+                <div class="qr-grid" id="qrGrid"></div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="flyerView" aria-labelledby="flyerHeading">
+          <div class="flyer-layout">
+            <section>
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">QR flyer builder</p>
+                  <h2 id="flyerHeading">Editable table card</h2>
+                </div>
+                <button class="primary-button" id="printFlyer" type="button">Print flyer</button>
+              </div>
+
+              <form class="flyer-form" id="flyerForm">
+                <label class="field">
+                  <span>Table</span>
+                  <select id="flyerTableSelect"></select>
+                </label>
+                <label class="field">
+                  <span>Format</span>
+                  <select id="flyerFormat">
+                    <option value="card">Table card</option>
+                    <option value="tent">Table tent</option>
+                    <option value="poster">Counter poster</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Theme</span>
+                  <select id="flyerTheme">
+                    <option value="fresh">Fresh green</option>
+                    <option value="ember">Warm ember</option>
+                    <option value="mono">Clean mono</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Restaurant name</span>
+                  <input id="flyerBrand" value="Central Bistro">
+                </label>
+                <label class="field span-2">
+                  <span>Headline</span>
+                  <input id="flyerHeadline" value="Scan to order from your table">
+                </label>
+                <label class="field span-2">
+                  <span>Subtext</span>
+                  <input id="flyerSubline" value="Browse the live menu, customize dishes, and send your order straight to the kitchen.">
+                </label>
+                <label class="field span-2">
+                  <span>Footer</span>
+                  <input id="flyerFooter" value="Need help? Tap Request staff help after scanning.">
+                </label>
+              </form>
+            </section>
+
+            <aside class="flyer-preview-panel">
+              <div class="flyer-preview fresh card" id="flyerPreview">
+                <div class="flyer-topline" id="flyerPreviewBrand">Central Bistro</div>
+                <h2 id="flyerPreviewHeadline">Scan to order from your table</h2>
+                <p id="flyerPreviewSubline">Browse the live menu, customize dishes, and send your order straight to the kitchen.</p>
+                <div class="flyer-qr-wrap">
+                  <img id="flyerQrImage" alt="Table QR code">
+                </div>
+                <strong id="flyerPreviewTable">Table 1</strong>
+                <small id="flyerPreviewFooter">Need help? Tap Request staff help after scanning.</small>
+              </div>
+              <div class="flyer-tips">
+                <p class="eyebrow">Print checks</p>
+                <span>Keep the QR area clear, print with strong contrast, and place the card where phones can scan without glare.</span>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="growthView" aria-labelledby="growthHeading">
+          <div class="growth-layout">
+            <section>
+              <p class="eyebrow">Restaurant performance</p>
+              <h2 id="growthHeading">Sales and demand</h2>
+              <div class="roadmap" id="roadmap"></div>
+            </section>
+            <aside class="playbook" id="growthPackages">
+              <p class="eyebrow">Business model</p>
+              <h3>Recommended packages</h3>
+              <div class="package-card">
+                <strong>Starter</strong>
+                <span>QR menu, cart, KDS, admin menu, table codes</span>
+              </div>
+              <div class="package-card">
+                <strong>Growth</strong>
+                <span>Payments, loyalty, WhatsApp receipts, upsells, analytics</span>
+              </div>
+              <div class="package-card">
+                <strong>Pro</strong>
+                <span>Inventory, multi-branch, POS sync, staff roles, advanced KDS</span>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="teamDialog" aria-labelledby="teamTitle">
+      <h2 id="teamTitle">Team branch access</h2>
+      <div id="teamAssignments"></div>
+      <p id="teamMessage" role="status"></p>
+      <button type="button" class="ghost-button" id="closeTeam">Close</button>
+    </dialog>
+    <dialog id="passwordDialog">
+      <form id="passwordForm">
+        <h2>Change password</h2>
+        <label class="field"><span>Current password</span><input name="current" type="password" autocomplete="current-password" required></label>
+        <label class="field"><span>New password</span><input name="password" type="password" autocomplete="new-password" minlength="14" maxlength="128" required></label>
+        <p id="passwordError" role="alert"></p>
+        <button type="button" class="ghost-button" id="closePassword">Cancel</button>
+        <button type="submit" class="primary-button">Save password</button>
+      </form>
+    </dialog>
+    <template id="receiptTemplate"></template>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

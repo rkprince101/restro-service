@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TableServe</title><link rel="stylesheet" href="/portal.css"></head>
+<body><header class="header"><div><a class="wordmark" href="">TableServe</a><p id="restaurant">Restaurant</p></div><div class="header-actions"><span id="connection" role="status">Connecting</span><span id="tableBadge"></span><button id="account" hidden>Account</button><button id="logout" hidden>Sign out</button></div></header>
+<main id="workspace"><div class="empty">Loading your restaurant...</div></main><p id="notice" class="toast" role="status" hidden></p>
+<dialog id="passwordDialog"><form id="passwordForm"><h2>Change password</h2><label>Current password<input name="current" type="password" autocomplete="current-password" required></label><label>New password<input name="password" type="password" autocomplete="new-password" minlength="14" maxlength="128" required></label><p id="passwordError" role="alert"></p><div class="actions"><button type="button" id="closePassword">Cancel</button><button class="primary">Save password</button></div></form></dialog>
+<script src="/portal.js"></script></body></html>

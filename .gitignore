@@ -1,0 +1,7 @@
+node_modules/
+data/*.sqlite*
+data/bootstrap-credentials.txt
+data/*.backup*
+data/backups/
+.env
+test-results/
